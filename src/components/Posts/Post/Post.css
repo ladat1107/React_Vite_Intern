@@ -1,0 +1,26 @@
+.post {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+.title-post {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: start;
+    color: #575ee5;
+    text-transform: uppercase;
+}
+
+.content {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: start;
+    color: #555;
+}

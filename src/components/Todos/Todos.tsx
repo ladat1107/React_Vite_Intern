@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import Input from "./Input/Input"
 import Todo from "./Todo/Todo"
@@ -28,7 +28,7 @@ export default function Todos(): React.ReactElement {
         let _todos = [...todos, { id: Math.random(), text: value, done: false }]
         setTodos(_todos)
     }
-    const handleChange = (todo: ITodoDataProps) => {
+    const handleChange = useCallback((todo: ITodoDataProps) => {
         const newTodos = todos.map((t) => {
             if (t.id === todo.id) {
                 return { ...t, done: !t.done }
@@ -36,13 +36,19 @@ export default function Todos(): React.ReactElement {
             return t
         })
         setTodos(newTodos)
-    }
-    const handleDelete = (todo: ITodoDataProps) => {
+    }, [])
+
+
+
+    const handleDelete = useCallback((todo: ITodoDataProps) => {
         const newTodos = todos.filter((t) => t.id !== todo.id)
         setTodos(newTodos)
-    }
+    }, [])
+
+    const [count, setCount] = useState(0);
     return (
         <div>
+            <div onClick={() => setCount(count + 1)}>{count}</div>
             <Input onClick={handleClick} />
             <div className="todo-list">
                 {todos.map((todo: ITodoDataProps) => {

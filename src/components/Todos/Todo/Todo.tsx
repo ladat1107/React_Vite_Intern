@@ -8,6 +8,7 @@ interface ITodoProps {
 }
 
 export default function Todo({ todo, handleChange, handleDelete }: ITodoProps): React.ReactElement {
+    console.log('render')
     return (
         <div key={todo.id} className="todo">
             <span className={todo.done ? "text-strike" : ""}>{todo.text}</span>

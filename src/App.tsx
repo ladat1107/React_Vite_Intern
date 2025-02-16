@@ -1,12 +1,12 @@
 import React from 'react'
 import './App.css'
-import Todo from './components/todo/Todos'
+import Posts from './components/Posts/Posts'
 
 function App(): React.ReactElement {
 
   return (
     <>
-      <Todo />
+      <Posts />
     </>
 
   )

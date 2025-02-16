@@ -1,0 +1,27 @@
+.input-data {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+.title-input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-height: 30px;
+}
+
+.content-input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-height: 60px;
+}
+
+.btn-create {
+    width: 20%;
+    border-radius: 5px;
+    background-color: #575ee5;
+    color: white;
+    cursor: pointer;
+
+}
