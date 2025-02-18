@@ -1,12 +1,19 @@
 import React from 'react'
 import './App.css'
-import Posts from './components/Posts/Posts'
-
+import Specialtys from './components/Specialtys/Specialtys'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 function App(): React.ReactElement {
-
+  // Create a client
+  const queryClient = new QueryClient()
   return (
     <>
-      <Posts />
+      <QueryClientProvider client={queryClient}>
+        <Specialtys />
+      </QueryClientProvider>
+
     </>
 
   )
