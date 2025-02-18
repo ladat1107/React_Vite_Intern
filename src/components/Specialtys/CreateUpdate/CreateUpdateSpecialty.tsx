@@ -18,12 +18,14 @@ export default function CreateUpdateSpecialty({ specialtyEdit }: { specialtyEdit
         resolver: zodResolver(SpecialtySchema), // Apply the zodResolver
     });
     const queryClient = useQueryClient()
+    
     useEffect(() => {
         if (specialtyEdit) {
             setValue("name", specialtyEdit.name)
             setValue("shortDescription", specialtyEdit.shortDescription)
         }
     }, [specialtyEdit])
+
     const mutationCreate = useMutation({
         mutationFn: createSpecialty,
         onSuccess: () => {

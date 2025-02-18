@@ -1,11 +1,10 @@
-import { useCallback, useEffect } from "react"
+import { useEffect } from "react"
 import "./CreateUpdate.css"
 import { ICreatePostRequest, IPost, IUpdatePostRequest } from "../../../types/post.type"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { PostSchema, TPostSchema } from "../../../schema/Post"
 import { createPost, updatePost } from "../../../api/post"
-import { set } from "zod"
 
 interface ICreateUpdateProps {
     editPost: IPost | null

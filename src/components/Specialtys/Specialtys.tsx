@@ -10,7 +10,7 @@ import { useState } from "react"
 export default function Specialtys(): React.ReactElement {
     // Queries
     const { data: dataSpecialty } = useQuery({ queryKey: ['specialties'], queryFn: getAllSpecialty })
-    
+
     const [specialtyEdit, setSpecialtyEdit] = useState<ISpecialty | null>(null)
     const queryClient = useQueryClient()
     const useDelete = useMutation({
@@ -31,6 +31,7 @@ export default function Specialtys(): React.ReactElement {
     }
     return (
         <>
+            <div className="font-roboto text-3xl font-bold underline mb-5">Specialty</div>
             <CreateUpdateSpecialty specialtyEdit={specialtyEdit} />
             <div className="specialtys">
                 {dataSpecialty?.EC === 0 && dataSpecialty?.DT?.rows?.map((item, index) =>

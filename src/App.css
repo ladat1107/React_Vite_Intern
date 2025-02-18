@@ -1,8 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --font-roboto: "Roboto", "sans-serif";
+  --font-beVietNam: "Be Vietnam Pro", "sans-serif";
+
+  --color-bg: #E8EFE1;
+
+
+
+  --color-gray-400: #CBD5E0;
+}
+
+
 #root {
-  max-width: 1280px;
+  width: 100vw;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  align-items: center;
+}
+
+body {
+  font-family: var(--font-roboto);
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: start;
 }
 
 .logo {
@@ -11,9 +32,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +45,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -41,6 +65,6 @@
   color: #888;
 }
 
-h2{
+h2 {
   color: #0fb562;
 }
