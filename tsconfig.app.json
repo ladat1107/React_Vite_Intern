@@ -23,6 +23,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "types": [
+      "vitest/globals"
+    ],
     "baseUrl": ".", // Đảm bảo baseUrl trỏ đến thư mục gốc của dự án
     "paths": {
       "@/*": [
@@ -31,6 +34,7 @@
     }
   },
   "include": [
-    "src"
+    "src",
+    "./src/test/setup.ts"
   ]
 }

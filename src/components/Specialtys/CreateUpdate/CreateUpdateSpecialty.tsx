@@ -2,13 +2,13 @@ import { useForm } from "react-hook-form";
 import { SpecialtySchema, TSpecialtySchema } from "../../../schema/Specialty";
 import { zodResolver } from "@hookform/resolvers/zod";
 import "./CreateUpdateSpecialty.css";
-import { IRequestCreateSpecialty, IRequestUpdateSpecialty, ISpecialty } from "../../../types/specialty.type";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createSpecialty, updateSpecialty } from "../../../api/specialty";
-import { useEffect } from "react";
+import { IRequestCreateSpecialty } from "../../../types/specialty.type";
+import { useQueryClient } from "@tanstack/react-query";
+import { createSpecialty } from "../../../api/specialty";
+import { useCustomMutation } from "@/hooks/useCustomMutation";
 
 
-export default function CreateUpdateSpecialty({ specialtyEdit }: { specialtyEdit: ISpecialty | null }): React.ReactElement {
+export default function CreateUpdateSpecialty(): React.ReactElement {
     const {
         formState: { errors },
         setValue,
@@ -18,57 +18,29 @@ export default function CreateUpdateSpecialty({ specialtyEdit }: { specialtyEdit
         resolver: zodResolver(SpecialtySchema), // Apply the zodResolver
     });
     const queryClient = useQueryClient()
-    
-    useEffect(() => {
-        if (specialtyEdit) {
-            setValue("name", specialtyEdit.name)
-            setValue("shortDescription", specialtyEdit.shortDescription)
-        }
-    }, [specialtyEdit])
 
-    const mutationCreate = useMutation({
-        mutationFn: createSpecialty,
+    const { mutate: mutationCreate } = useCustomMutation(createSpecialty, {
         onSuccess: () => {
-            // Invalidate and refetch
             queryClient.invalidateQueries({ queryKey: ['specialties'] })
             setValue("name", "")
             setValue("shortDescription", "")
         },
-        onError: (error) => {
-            console.error(error)
-        }
     })
-    const mutationEdit = useMutation({
-        mutationFn: updateSpecialty,
-        onSuccess: () => {
-            // Invalidate and refetch
-            queryClient.invalidateQueries({ queryKey: ['specialties'] })
-            setValue("name", "")
-            setValue("shortDescription", "")
-        },
-        onError: (error) => {
-            console.error(error)
-        }
-    })
+
     const handleClick = async (value: TSpecialtySchema) => {
-        if (specialtyEdit) {
-            let data: IRequestUpdateSpecialty = { id: specialtyEdit.id, name: value.name, shortDescription: value.shortDescription, image: "https://cdn-pkh.longvan.net/medpro-production/default/avatar/subjects/ho_hap.png", status: 1 }
-            mutationEdit.mutate(data)
-        } else {
-            let data: IRequestCreateSpecialty = { name: value.name, shortDescription: value.shortDescription, image: "https://cdn-pkh.longvan.net/medpro-production/default/avatar/subjects/ho_hap.png", status: 1 }
-            mutationCreate.mutate(data)
-        }
+        let data: IRequestCreateSpecialty = { name: value.name, shortDescription: value.shortDescription, image: "https://cdn-pkh.longvan.net/medpro-production/default/avatar/subjects/ho_hap.png", status: 1 }
+        mutationCreate(data)
     }
     return (
-        <div>
+        <div data-testid="create-update-specialty">
             <form>
                 <div className="input-data">
                     <input className="title-input" type="text" placeholder="Title" {...register("name")} />
-                    {errors.name && <span className="error">{errors.name.message}</span>}
+                    {errors.name && <span data-testid="error-input-name" className="text-red-600">{errors.name.message}</span>}
                     <textarea className="content-input" rows={5} placeholder="shortDescription"  {...register("shortDescription")} />
-                    {errors.shortDescription && <span className="error">{errors.shortDescription.message}</span>}
-                    <button className="btn-create" type="submit" onClick={handleSubmit(handleClick)}
-                    >{specialtyEdit ? "Update" : "Create"}</button>
+                    {errors.shortDescription && <span data-testid="error-input-shortDescription" className="text-red-600">{errors.shortDescription.message}</span>}
+                    <button data-testid="upsert-specialty" className="btn-create" type="submit" onClick={handleSubmit(handleClick)}
+                    >Create</button>
                 </div>
             </form>
         </div>

@@ -5,18 +5,15 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 
-import LiveAnyWhere from './components/PageTaiwind/LiveAnyWhere'
+import Specialtys from './components/Specialtys/Specialtys'
 function App(): React.ReactElement {
-  // Create a client
   const queryClient = new QueryClient()
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <LiveAnyWhere />
+        <Specialtys />
       </QueryClientProvider>
-
     </>
-
   )
 }
 

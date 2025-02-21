@@ -5,12 +5,10 @@ export interface ISpecialty {
     shortDescription: string;
     image: string;
     status: number;
-    createdAt: string;
-    updatedAt: string;
 }
 
 export interface IResponseSpecialty {
-    count: number | null;
+    count: number | 0;
     rows: ISpecialty[] | [];
 }
 
@@ -23,8 +21,8 @@ export interface IRequestCreateSpecialty {
 
 export interface IRequestUpdateSpecialty {
     id: number;
-    name: string;
-    shortDescription: string;
-    image: string;
-    status: number;
+    name?: string;
+    shortDescription?: string;
+    image?: string;
+    status?: number;
 }
